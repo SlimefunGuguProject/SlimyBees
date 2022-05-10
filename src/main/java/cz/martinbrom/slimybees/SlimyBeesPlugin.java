@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -107,8 +108,9 @@ public class SlimyBeesPlugin extends JavaPlugin implements SlimefunAddon {
     public void onPluginStart() {
         logger().info("Started loading SlimyBees");
 
-        // TODO: 15.05.21 Config stuff
-        // TODO: 15.05.21 Auto update
+        if (getConfig().getBoolean("options.auto-update")) {
+            new GuizhanBuildsUpdater(this, getFile(), "SlimefunGuguProject", "SlimeyBees", "master", false).start();
+        }
 
         new Metrics(this, 12045);
 
@@ -147,7 +149,7 @@ public class SlimyBeesPlugin extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/martinbrom/SlimyBees/issues";
+        return "https://github.com/SlimefunGuguProject/SlimyBees/issues";
     }
 
     @Nonnull

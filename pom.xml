@@ -6,7 +6,7 @@
     <groupId>cz.martinbrom</groupId>
     <artifactId>SlimyBees</artifactId>
 
-    <version>1.0.0-UNOFFICIAL</version>
+    <version>UNOFFICIAL</version>
     <packaging>jar</packaging>
 
     <description>SlimyBees is a Slimefun4 addon heavily inspired by the bee portion of the famous MC mod, Forestry.</description>
@@ -100,12 +100,25 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
                 <configuration>
+                    <minimizeJar>true</minimizeJar>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>cz.martinbrom.slimybees.bstats</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>net.guizhanss.guizhanlib</pattern>
+                            <shadedPattern>cz.martinbrom.slimybees.guizhanlib</shadedPattern>
+                        </relocation>
                     </relocations>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                 </configuration>
                 <executions>
                     <execution>
@@ -153,7 +166,7 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>2.2.1</version>
+            <version>3.0.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -190,6 +203,12 @@
                     <artifactId>annotations</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib</artifactId>
+            <version>0.9.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
